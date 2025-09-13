@@ -49,19 +49,6 @@ webhook_payload = manager.get_batch_details(lote["batch_id"])
 
 ---
 
-## 🔀 Estratégias de divisão (comparativo)
-
-| Método                       | Como funciona                                     |      Previsibilidade | Variação dos valores | Controle de quantidade | Risco de ultrapassar teto | Casos de uso típicos                    |
-| ---------------------------- | ------------------------------------------------- | -------------------: | -------------------: | ---------------------: | ------------------------: | --------------------------------------- |
-| **1 – Linear**               | Divide em parcelas iguais/quase iguais até o teto |                 Alta |                Baixa |     Baixo (automático) |               Muito baixo | Boletos parcelados, Payouts regulares   |
-| **2 – Semi-aleatório**       | 7 parcelas por padrão (ou 3–10 com `shuffle`)     |                Média |                Média |                  Médio |               Muito baixo | Simular dinâmica orgânica de valores    |
-| **3 – Aleatório controlado** | Sorteio dentro de limites válidos                 |                Média |                 Alta |     Baixo (automático) |               Muito baixo | Ofuscar padrão mantendo compliance      |
-| **4 – Quantidade definida**  | Você define `payment_count` (≤ 100)               | Alta (na quantidade) |           Média/Alta | **Alto** (customizado) |               Muito baixo | Integrações com número fixo de parcelas |
-
-> Todos os métodos **impedem** valores acima de **R\$ 14.999,99** por transação.
-
----
-
 ## ✅ Exemplos práticos (copie e cole)
 
 > Abaixo, exemplos **reais** de execução, cobrindo **todos os métodos**.
@@ -406,19 +393,6 @@ lot = manager.create_batch(
 responses = manager.process_batch(lot["batch_id"])
 webhook_payload = manager.get_batch_details(lot["batch_id"])
 ```
-
----
-
-## 🔀 Splitting strategies (comparison)
-
-| Method                       | How it works                                |  Predictability | Amount variance |     Count control | Exceed-cap risk | Typical use cases                       |
-| ---------------------------- | ------------------------------------------- | --------------: | --------------: | ----------------: | --------------: | --------------------------------------- |
-| **1 – Linear**               | Equal/nearly equal parts up to cap          |            High |             Low |        Low (auto) |        Very low | Regular payouts, equal installments     |
-| **2 – Semi-random**          | 7 parts by default (or 3–10 with `shuffle`) |          Medium |          Medium |            Medium |        Very low | More organic-looking patterns           |
-| **3 – Randomized & bounded** | Random draw within safe bounds              |          Medium |            High |        Low (auto) |        Very low | Obfuscate patterns while compliant      |
-| **4 – Fixed count**          | You set `payment_count` (≤ 100)             | High (on count) |     Medium/High | **High** (custom) |        Very low | Integrations needing fixed installments |
-
-> All methods **prevent** values above **R\$ 14,999.99** per transaction.
 
 ---
 
